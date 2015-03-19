@@ -8,4 +8,7 @@ class StaticPagesController < ApplicationController
   def about
   end
 
+  def laser
+  end
+
 end
