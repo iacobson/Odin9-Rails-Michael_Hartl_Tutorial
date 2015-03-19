@@ -85,3 +85,4 @@ production:
   min_messages: warning
   database: Odin9-Rails-Michael_Hartl_Tutorial_production
   username: Michael_Hartl_Tutorial
+  timeout: 5000
