@@ -6,7 +6,7 @@ class StaticPagesControllerTest < ActionController::TestCase
     get :home
     assert_response :success
     # asesert that the page has a HTML tag <title>, taht contains the value "Home...."
-    assert_select "title", "Home | Ruby on Rails Tutorial Sample App"
+    assert_select "title", "Ruby on Rails Tutorial Sample App"
   end
 
   test "should get help" do
