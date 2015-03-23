@@ -32,7 +32,7 @@ gem 'font-awesome-rails'    # only if you need more icons
 gem 'simple_form'   # always install when working with forms
 
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
