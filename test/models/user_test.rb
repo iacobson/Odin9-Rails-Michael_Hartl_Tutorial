@@ -52,7 +52,7 @@ class UserTest < ActiveSupport::TestCase
   # test email validation with some invalid addresses
   test "email validation should reject invalid addresses" do
     invalid_addresses = %w[user@example,com user_at_foo.org user.name@example.
-                           foo@bar_baz.com foo@bar+baz.com]
+                           foo@bar_baz.com foo@bar+baz.com foo@bar..com]
     invalid_addresses.each do |invalid_address|
       @user.email = invalid_address
       assert_not @user.valid?, "#{invalid_address.inspect} should be invalid"
@@ -68,6 +68,16 @@ class UserTest < ActiveSupport::TestCase
     # initial user created in setup method, must be saved, so the e-mail will be already in the DB
     @user.save
     assert_not duplicate_user.valid?
+  end
+
+  # assert if the e-mails are saved in the database as lower-case
+  test "email addresses should be saved as lower-case" do
+    #test with mix case
+    mixed_case_email = "Foo@ExAMPle.CoM"
+    @user.email = mixed_case_email
+    @user.save
+    # assert if mail provided converted to downcase is equal (==) to the email saved and reloaded from the database (.reload)
+    assert_equal mixed_case_email.downcase, @user.reload.email
   end
 
   # password should be minimum 6 characters
