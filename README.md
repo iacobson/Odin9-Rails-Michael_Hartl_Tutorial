@@ -5,3 +5,4 @@ https://www.railstutorial.org/
 Customization:
 - using slim instead of erb
 - using simple_form
+- using sass instead of scss

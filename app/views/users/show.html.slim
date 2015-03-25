@@ -1,0 +1,10 @@
+- provide(:title, @user.name)
+
+.row
+  // aside tag defines a sidebar
+  aside.col-md-4
+    section.user_info
+      h1
+        // gravatar_for method defined in users_helper.rb
+        = gravatar_for @user
+        = @user.name

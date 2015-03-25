@@ -1,0 +1,9 @@
+// partials in "shared" directory can be used across all views
+
+- if @user.errors.any?
+  #error_explanation
+    .alert.alert-danger
+      | The form contains #{pluralize(@user.errors.count, "error")}
+    ul
+      - @user.errors.full_messages.each do |msg|
+        li = msg
