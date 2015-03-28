@@ -16,6 +16,11 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     end
     # assert that after failing creating new user, it is redirecting to the "new" template
     assert_template 'users/new'
+    # assert error messages
+    # assert that you will have a div with id "error_explanation" defined in views/shared/_error_messages.html.slim
+    assert_select 'div#error_explanation'
+    # CSS class for field with error
+    assert_select 'div.alert-danger'
   end
 
   test "valid signup information" do
@@ -30,6 +35,11 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
 
     end
     assert_template 'users/show'
+    # assert that after user creation, it is automatically logged in
+    # is_logged_in? method is defined in the test_helper.rb
+    assert is_logged_in?
+
+
   end
 
 

@@ -1,1 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# the information inside the fixtures is considered as persistent database information during the tests
+
+dorian:
+  name: Dorian Iacobescu
+  email: dorian.iacobescu@gmail.com
+  # method defined in the User Model, in order to generate a valid cripted password
+  password_digest: <%= User.digest('password') %>
