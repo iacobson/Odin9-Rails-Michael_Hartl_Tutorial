@@ -22,7 +22,9 @@ class User < ActiveRecord::Base
     # Requirements:
       # User model must have an attribute called password_digest
       # gem 'bcrypt'
-  validates :password, length: { minimum: 6 }
+
+  # allow_blank is needed in order to be able to update the user info, without updating the password each time
+  validates :password, length: { minimum: 6 }, allow_blank: true
 
   # Returns the hash digest of the given string. Needed for Fixtures in tests
   def User.digest(string)

@@ -1,0 +1,9 @@
+= simple_form_for(@user) do |f|
+  // custom error messages will be defined in the partial inside "shared" folder
+  = render 'shared/error_messages'
+  = f.input :name 
+  = f.input :email
+  = f.input :password
+  = f.input :password_confirmation
+  // new_record? returns true if this object hasn’t been saved yet – that is, a record for the object doesn’t exist in the database yet; otherwise, returns false.
+  = f.button :submit, @user.new_record? ? "Create my account" : "Save changes", class: "btn btn-primary"

@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
       # if the checkbox is checked, remember the user
       # remember method defined in sessions_helper
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-      redirect_to user
+      redirect_back_or(user) # method defined in sessions_helper
 
     else
       # flash.now, is specifically designed for displaying flash messages on rendered pages. Unlike the contents of flash, the contents of flash.now disappear as soon as there is an additional request
