@@ -8,6 +8,7 @@ h1 Log in
     = simple_form_for(:session, url: login_path) do |f|
       = f.input :email
       = f.input :password
+      = link_to "(forgot password)", new_password_reset_path
       = f.input :remember_me, as: :boolean, boolean_style: :inline, label: "Remember me on this computer", input_html: {class: "checkbox inline"}
       = f.button :submit, "Log in", class: "btn btn-primary"
     p

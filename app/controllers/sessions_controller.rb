@@ -9,12 +9,19 @@ class SessionsController < ApplicationController
 
     # "authenticate" method provided by has_secure_password  in User Model
     if user && user.authenticate(params[:session][:password])
-      # log_id method defined in sessions_helper
-      log_in(user)
-      # if the checkbox is checked, remember the user
-      # remember method defined in sessions_helper
-      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-      redirect_back_or(user) # method defined in sessions_helper
+      if user.activated?
+        # log_id method defined in sessions_helper
+        log_in(user)
+        # if the checkbox is checked, remember the user
+        # remember method defined in sessions_helper
+        params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+        redirect_back_or(user) # method defined in sessions_helper
+      else
+        message  = "Account not activated. "
+        message += "Check your email for the activation link."
+        flash[:warning] = message
+        redirect_to root_url
+      end
 
     else
       # flash.now, is specifically designed for displaying flash messages on rendered pages. Unlike the contents of flash, the contents of flash.now disappear as soon as there is an additional request

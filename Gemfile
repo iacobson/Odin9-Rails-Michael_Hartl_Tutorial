@@ -31,7 +31,7 @@ gem 'autoprefixer-rails'    # adds browsers prefixes to css
 gem 'font-awesome-rails'    # only if you need more icons
 gem 'simple_form'   # always install when working with forms
 gem 'faker' # add sample content
-gem 'will_paginate' 
+gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 
 # Use ActiveModel has_secure_password

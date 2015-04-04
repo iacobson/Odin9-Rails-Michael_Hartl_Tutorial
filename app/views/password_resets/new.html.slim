@@ -1,0 +1,8 @@
+- provide(:title, "Forgot password")
+h1 Forgot password
+
+.row
+  .col-md-6.col-md-offset-3
+    = simple_form_for(:password_reset, url: password_resets_path) do |f|
+      = f.input :email
+      = f.button :submit, "Submit", class: "btn btn-primary"
