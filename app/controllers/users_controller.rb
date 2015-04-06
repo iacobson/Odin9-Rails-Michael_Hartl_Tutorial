@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
   def index
     # all users except current user
-    @users = User.where.not(id: current_user.id).paginate(page: params[:page])
+    @users = User.where.not(id: current_user.id).where(activated: true).paginate(page: params[:page])
     #debugger
   end
 
