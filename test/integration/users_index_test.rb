@@ -6,7 +6,7 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
     @non_admin = users(:matza)
   end
 
-  test "iindex as admin including pagination and delete links" do
+  test "index as admin including pagination and delete links" do
     log_in_as(@admin)
     # go to the index
     get users_path

@@ -1,0 +1,7 @@
+= simple_form_for @micropost, html: { multipart: true } do |f|
+  // object will be passed to error_messages. Object can be either micropost or user
+  = render 'shared/error_messages', object: f.object
+  = f.input :content, label: false, placeholder: "Compose new micropost..."
+  = f.button :submit, "Post", class: "btn btn-primary"
+  span.picture
+    = f.file_field :picture, accept: 'image/jpeg,image/gif,image/png'

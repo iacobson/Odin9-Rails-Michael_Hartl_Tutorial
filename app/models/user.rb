@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+
+  has_many :microposts, dependent: :destroy
+
   # create an accessible attribute for "remember" method below
   attr_accessor :remember_token, :activation_token, :reset_token
 
@@ -89,6 +92,11 @@ class User < ActiveRecord::Base
   # Returns true if a password reset has expired.
   def password_reset_expired?
     reset_sent_at < 2.hours.ago
+  end
+
+  # building users posts feed
+  def feed
+    Micropost.where("user_id = ?", id)
   end
 
   #PRIVATE METHODS

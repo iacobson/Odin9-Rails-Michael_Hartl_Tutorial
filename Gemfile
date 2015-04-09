@@ -33,6 +33,9 @@ gem 'simple_form'   # always install when working with forms
 gem 'faker' # add sample content
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
+gem 'carrierwave' # file upload
+gem 'mini_magick'# image resize
+gem 'fog' # cloud storage (Amazon S3)
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
