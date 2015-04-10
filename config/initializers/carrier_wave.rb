@@ -3,6 +3,7 @@ if Rails.env.production?
     config.fog_credentials = {
       # Configuration for Amazon S3, the keys will be stored directly in Heroku
       :provider              => 'AWS',
+      :region => ENV["AWS_REGION"],
       :aws_access_key_id     => ENV['S3_ACCESS_KEY'],
       :aws_secret_access_key => ENV['S3_SECRET_KEY']
     }
