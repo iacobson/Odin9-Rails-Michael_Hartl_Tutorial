@@ -2,6 +2,18 @@ class User < ActiveRecord::Base
 
   has_many :microposts, dependent: :destroy
 
+  # the follower has active relationships with the other users (followed)
+  has_many :active_relationships, class_name:  "Relationship",
+                                foreign_key: "follower_id",
+                                dependent:   :destroy
+  # the followed has passive relationships with users follwoing him
+  has_many :passive_relationships, class_name:  "Relationship",
+                                 foreign_key: "followed_id",
+                                 dependent:   :destroy
+  # 'source: :followed' is utilized in order to use :following instead of awkward followeds
+  has_many :following, through: :active_relationships, source: :followed
+  has_many :followers, through: :passive_relationships
+
   # create an accessible attribute for "remember" method below
   attr_accessor :remember_token, :activation_token, :reset_token
 
@@ -96,7 +108,26 @@ class User < ActiveRecord::Base
 
   # building users posts feed
   def feed
-    Micropost.where("user_id = ?", id)
+    following_ids = "SELECT followed_id FROM relationships
+                 WHERE  follower_id = :user_id"
+    Micropost.where("user_id IN (#{following_ids})
+                 OR user_id = :user_id", user_id: id)
+  end
+
+  # FOLLOWING ACTIONS
+  # Follows a user.
+  def follow(other_user)
+    active_relationships.create(followed_id: other_user.id)
+  end
+
+  # Unfollows a user.
+  def unfollow(other_user)
+    active_relationships.find_by(followed_id: other_user.id).destroy
+  end
+
+  # Returns true if the current user is following the other user.
+  def following?(other_user)
+    following.include?(other_user)
   end
 
   #PRIVATE METHODS

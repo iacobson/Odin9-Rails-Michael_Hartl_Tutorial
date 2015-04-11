@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   # logged_in_user method defined below in the privates methods
-  before_action :logged_in_user, only: [:edit, :update, :index, :destroy]
+  before_action :logged_in_user, only: [:edit, :update, :index, :destroy, :following, :followers]
   before_action :correct_user, only: [:edit, :update]
   before_action :admin_user, only: [:destroy]
 
@@ -30,6 +30,15 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @microposts = @user.microposts.paginate(page: params[:page])
 
+    # relationship follow/unfollow
+    if current_user
+      if current_user.following?(@user)
+        @relationship = current_user.active_relationships.find_by(followed_id: @user.id)
+      else
+        @relationship = current_user.active_relationships.build
+      end
+    end
+
   end
 
   def edit
@@ -53,7 +62,19 @@ class UsersController < ApplicationController
     redirect_to users_path
   end
 
+  def following
+    @title = "Following"
+    @user  = User.find(params[:id])
+    @users = @user.following.paginate(page: params[:page])
+    render 'show_follow'
+  end
 
+  def followers
+    @title = "Followers"
+    @user  = User.find(params[:id])
+    @users = @user.followers.paginate(page: params[:page])
+    render 'show_follow'
+  end
 
   private
 
